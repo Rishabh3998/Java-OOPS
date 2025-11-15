@@ -1,0 +1,333 @@
+## JAVA PACKAGES:
+
+1. WHAT ARE PACKAGES?
+    - Packages are directories/folders used to organize Java classes and interfaces
+    - They help group related code together in a structured way
+    - Think of them as a filing system for your Java code
+    - Example: java.util, java.io, java.lang are built-in packages
+
+2. WHY DO WE NEED PACKAGES?
+    - Organize code into logical groups
+    - Avoid naming conflicts (two classes with same name in different packages)
+    - Control access to classes and members
+    - Make code reusable and maintainable
+    - Easy to navigate large projects
+
+3. HOW TO CREATE A PACKAGE?
+    - Add this line at the TOP of your Java file:
+      package packageName;
+    - Example: package com.myapp.utils;
+    - The folder structure must match the package name
+    - com/myapp/utils/MyClass.java
+
+4. HOW TO USE CLASSES FROM OTHER PACKAGES?
+    - Use import statement:
+      import packageName.ClassName;
+      import packageName.*;  // imports all classes
+    - Example: import java.util.ArrayList;
+
+5. KEY FEATURES OF PACKAGES:
+    a) Namespace Management - prevents naming conflicts
+    b) Access Control - public, private, protected, default
+    c) Reusability - use classes across different projects
+    d) Organization - large projects stay organized
+    e) Encapsulation - hides internal implementation
+
+6. TYPES OF PACKAGES:
+    a) Built-in Packages
+        - java.lang (String, Math, System)
+        - java.util (ArrayList, HashMap, Collections)
+        - java.io (File, InputStream, OutputStream)
+        - java.awt (GUI components)
+    
+    b) User-defined Packages
+        - Created by developers for their projects
+        - Follow naming convention: com.company.projectname
+
+7. NAMING CONVENTION FOR PACKAGES:
+    - Use lowercase letters
+    - Use reverse domain name: com.google.myapp
+    - Use dots to separate components
+    - Example: com.amazon.ecommerce.payment
+
+8. STATIC IMPORT:
+    - Import static members directly
+    - import static java.lang.Math.sqrt;
+    - Then use: sqrt(25) instead of Math.sqrt(25)
+
+9. PROS (ADVANTAGES):
+    ✓ Code Organization - keeps code clean and structured
+    ✓ Namespace Management - solves naming conflicts
+    ✓ Access Control - protects sensitive code (default access)
+    ✓ Code Reusability - easy to use in other projects
+    ✓ Maintainability - easy to find and modify code
+    ✓ Security - can restrict access to certain classes
+    ✓ Avoid Collisions - multiple User classes possible
+    ✓ Documentation - organized structure is self-documenting
+
+10. CONS (DISADVANTAGES):
+     ✗ Learning Curve - beginners find it complex
+     ✗ Extra Files - need to create folder structures
+     ✗ Slower Compilation - has to search multiple paths
+     ✗ Memory Overhead - loading multiple packages uses memory
+     ✗ Circular Dependencies - can create dependency issues
+     ✗ Import Overhead - need to remember import statements
+     ✗ IDE Dependency - sometimes confusing without good IDE
+
+11. PRACTICAL EXAMPLE:
+     Package Structure:
+     com/
+     └── myapp/
+          ├── utils/
+          │   └── Calculator.java
+          ├── models/
+          │   └── User.java
+          └── main/
+                └── Main.java
+
+12. SUMMARY:
+     - Packages organize Java classes
+     - Use package statement at file top
+     - Use import to access other packages
+     - Essential for large projects
+     - Prevents code conflicts and improves maintainability
+
+
+
+## STATIC PROPERTY IN JAVA:
+
+1. WHAT IS A STATIC PROPERTY?
+    - A static property (or static variable) belongs to the CLASS, not to individual objects
+    - It is shared by all instances of the class
+    - Declared using the 'static' keyword
+    - Example: static int count = 0;
+
+2. KEY CHARACTERISTICS:
+    - Shared across all objects of the class
+    - Initialized only once when the class is loaded
+    - Accessed using ClassName.propertyName
+    - Memory is allocated only once in the heap
+    - Persists throughout the program execution
+
+3. SYNTAX:
+    static dataType propertyName = value;
+    Example: static int totalEmployees = 0;
+
+4. HOW TO ACCESS STATIC PROPERTIES:
+    a) Using class name: ClassName.propertyName
+    b) Using object reference: object.propertyName (not recommended)
+    c) Example: Employee.totalEmployees
+
+5. STATIC vs INSTANCE PROPERTIES:
+    Static Property:
+    - Belongs to class
+    - Shared by all objects
+    - Accessed via ClassName
+    - Memory allocated once
+    
+    Instance Property:
+    - Belongs to object
+    - Each object has its own copy
+    - Accessed via object reference
+    - Memory allocated for each object
+
+6. PRACTICAL EXAMPLE:
+    public class Employee {
+        static int employeeCount = 0;  // Static property
+        String name;                    // Instance property
+        
+        Employee(String name) {
+            this.name = name;
+            employeeCount++;  // Increment shared counter
+        }
+    }
+    
+    Employee e1 = new Employee("John");
+    Employee e2 = new Employee("Jane");
+    System.out.println(Employee.employeeCount);  // Output: 2
+
+7. ADVANTAGES OF STATIC PROPERTIES:
+    ✓ Memory efficient - single copy shared by all objects
+    ✓ Global access - can be accessed from anywhere
+    ✓ Useful for counters and constants
+    ✓ Reduces memory footprint
+    ✓ Maintains state across objects
+
+8. DISADVANTAGES OF STATIC PROPERTIES:
+    ✗ Not object-specific - can cause confusion
+    ✗ Thread safety issues - problematic in multithreading
+    ✗ Hard to test - global state makes unit testing difficult
+    ✗ Reduced flexibility - cannot override in subclasses
+    ✗ Hidden dependencies - implicit coupling between classes
+
+9. COMMON USE CASES:
+    - Counters (object count, request count)
+    - Constants (final static int MAX_SIZE = 100)
+    - Shared resources (database connections)
+    - Utility functions (static methods)
+    - Configuration values
+
+
+When a member is declared static it can be accessed before any of the object of the class being created, and
+without referencing to it. Without using an object of this class we can access this static variable, even if 
+we don't create any object still we can access it. Static variable are independent, they don't depend upon 
+objects.
+
+
+We can create static methods as well.
+
+Eg:
+public static void main () {}
+
+static variable, static method they belong to the class, not to the object.
+
+Inside a static method we cannot use anything which is non-static. A static method can only access static data.
+Because a non-static data belongs to an object. Therefore without instance we won;t be able to access the non-
+static method hence we cannot use it inside a static method.
+
+// Not dependent on objects
+static void fun () {}
+
+
+// Dependent on objects
+void greeting () {}
+
+// This non-static method depend on object
+void fun () {
+    greeting(); // we can use static method in non-static method. But not vice versa
+}
+
+
+10. STATIC KEYWORD IN NESTED CLASSES:
+
+a) STATIC NESTED CLASSES:
+    - A nested class declared as static
+    - Does NOT have access to instance members of outer class
+    - Can only access static members of outer class
+    - Can be instantiated without creating outer class instance
+    
+    Example:
+    public class Outer {
+        static int staticVar = 10;
+        int instanceVar = 20;
+        
+        static class StaticNested {
+            void display() {
+                System.out.println(Outer.staticVar);  // ✓ Can access
+                // System.out.println(Outer.instanceVar);  // ✗ Cannot access
+            }
+        }
+    }
+    
+    // Usage - NO need to create Outer instance
+    Outer.StaticNested nested = new Outer.StaticNested();
+    nested.display();
+
+b) NON-STATIC NESTED CLASSES (INNER CLASSES):
+    - Also called Inner Classes
+    - HAS access to all members (static and instance) of outer class
+    - REQUIRES an instance of outer class to be instantiated
+    - Carries implicit reference to outer class instance
+    
+    Example:
+    public class Outer {
+        static int staticVar = 10;
+        int instanceVar = 20;
+        
+        class InnerClass {
+            void display() {
+                System.out.println(Outer.staticVar);     // ✓ Can access
+                System.out.println(Outer.this.instanceVar);  // ✓ Can access
+            }
+        }
+    }
+    
+    // Usage - MUST create Outer instance first
+    Outer outer = new Outer();
+    Outer.InnerClass inner = outer.new InnerClass();
+    inner.display();
+
+11. COMPARISON: STATIC vs NON-STATIC NESTED CLASSES:
+
+    Static Nested Class:
+    - Independent of outer class instance
+    - Cannot access instance members of outer class
+    - Can access only static members
+    - Instantiation: Outer.StaticNested obj = new Outer.StaticNested();
+    - Memory: Single copy for all outer instances
+    
+    Non-Static Nested Class (Inner Class):
+    - Dependent on outer class instance
+    - Can access all members (static and instance)
+    - Carries implicit reference to outer instance
+    - Instantiation: Outer outer = new Outer(); Outer.Inner obj = outer.new Inner();
+    - Memory: Each inner object holds reference to outer instance
+
+12. DETAILED EXAMPLES:
+
+    Example 1: Static Nested Class
+    public class Bank {
+        static String bankName = "XYZ Bank";
+        String accountNumber = "12345";
+        
+        static class Account {
+            void showBankName() {
+                System.out.println("Bank: " + bankName);  // ✓ Works
+            }
+            
+            void showAccountNumber() {
+                // System.out.println(accountNumber);  // ✗ ERROR - cannot access
+            }
+        }
+    }
+    
+    // Usage
+    Bank.Account account = new Bank.Account();
+    account.showBankName();  // Output: Bank: XYZ Bank
+
+    Example 2: Non-Static Nested Class
+    public class Company {
+        static String companyName = "TechCorp";
+        String employeeName = "John";
+        
+        class Employee {
+            void displayInfo() {
+                System.out.println("Company: " + companyName);      // ✓ Works
+                System.out.println("Employee: " + employeeName);     // ✓ Works
+            }
+        }
+    }
+    
+    // Usage
+    Company company = new Company();
+    Company.Employee emp = company.new Employee();
+    emp.displayInfo();
+
+13. THEORY EXPLANATION:
+
+    Why Static Nested Classes Cannot Access Instance Members?
+    - Static nested classes are loaded when the class is loaded
+    - Instance members exist only when an object is created
+    - Since static class doesn't require outer instance, it can't access instance data
+    - It's a compile-time restriction to prevent null pointer exceptions
+    
+    Why Inner Classes Can Access Everything?
+    - Inner classes are always tied to an outer instance
+    - They hold an implicit reference to the outer object (Outer.this)
+    - This reference allows access to both static and instance members
+    - Memory overhead: each inner object carries outer reference
+
+14. KEY RULES:
+
+    Static Nested Class Rules:
+    ✓ Access: static members of outer class only
+    ✓ Instantiation: direct (no outer instance needed)
+    ✓ Use case: utility classes, helper classes
+    ✗ Cannot access: instance variables, instance methods
+    
+    Inner Class Rules:
+    ✓ Access: all members (static and instance)
+    ✓ Instantiation: requires outer instance
+    ✓ Use case: event listeners, callbacks, tight coupling
+    ✗ Memory overhead: carries implicit reference
+

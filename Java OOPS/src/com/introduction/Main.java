@@ -105,7 +105,27 @@ public class Main {
         // Instantiation (returns a reference which stored after allocation done in heap)
         rishabh = new Student();
 
-        System.out.println(rishabh); // Output: com.introduction.Student@8efb846
+        System.out.println(rishabh);
+        // Output: com.introduction.Student@8efb846
+        // In this output @8efb846 is a hash which prints when we don't apply toString()
+        // method on an object, If not present it takes the by-default toString method and
+        // generate a hash to print for the object which is about to display via print.
+        // and before the hashCode it prints the package name, println internally calls
+        // this toString() method, this method says obj.toString() if this method is not
+        // present in the object class here which is Student class, then it will take the
+        // by-default one which is present in Object.java class which prints hashcode.
+
+        // When you print an object without overriding the toString() method, Java uses
+        // the default implementation inherited from the Object class.
+        // This default toString() method returns a string in the following format:
+        // <fully-qualified-class-name>@<hashcode-in-hex>
+
+        // Here:
+        // com.introduction.Student is the fully qualified class name.
+        // 8efb846 is the hexadecimal representation of the object’s hash code.
+        // The println() method internally calls toString() on the object.
+        // If your class (e.g., Student) does not override toString(), the default implementation
+        // from Object.java is used, which produces this hash-based output.
 
         // Initialization of properties without using setter
         rishabh.rollNumber = 1;

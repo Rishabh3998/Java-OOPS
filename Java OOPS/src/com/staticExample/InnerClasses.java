@@ -1,0 +1,72 @@
+package com.staticExample;
+
+class OutSideClass {
+    static String name;
+
+    public OutSideClass(String name) {
+        OutSideClass.name = name;
+    }
+}
+
+// Outside class cannot be static because it is not itself dependent on any other class
+public class InnerClasses {
+    // Inner class can be static or non-static, because this class is dependent on outside class
+    static class Test {
+        String name;
+
+        public Test(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
+    }
+
+    class Test2 {
+        String name;
+
+        public Test2(String name) {
+            this.name = name;
+        }
+    }
+
+    public static void main(String[] args) {
+        // A static class object can be used here.
+        Test a = new Test("A");
+        Test b = new Test("B");
+
+        System.out.println(a.name);
+        System.out.println(b.name);
+
+        System.out.println(a); // Before: IntroductionToStatic.InnerClasses$Test@30f39991
+        System.out.println(a); // After: A (Overriding toString() method in Test class)
+
+
+        // This object class is non-static, and we cannot access this in a static method
+        // Test2 b = new Test2("Name");
+
+        OutSideClass a1 = new OutSideClass("A1");
+        OutSideClass b1 = new OutSideClass("B1");
+
+        System.out.println(a1.name);
+        System.out.println(b1.name);
+    }
+}
+
+// Note: As we know that objects are created at runtime.
+// And we also know that static variables and methods are not dependent on objects.
+// Therefore, static entities are created during compile time.
+
+// Outside class cannot be static.
+// static class A {
+//
+// }
+
+// Static variables and methods belong to the class itself, not to individual objects.
+// Because of this, they are loaded and made ready when the class is loaded, before any objects are created.
+// Objects are created at runtime, but static members don’t depend on objects,
+// so they are resolved earlier — when the program is being prepared (compile time / class loading time),
+// not when objects are created.
+
