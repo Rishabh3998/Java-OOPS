@@ -1,0 +1,202 @@
+Object-Oriented Programming (OOP) in Java is a programming paradigm that organizes software around objects — 
+instances of classes that combine state (fields) and behavior (methods). Java's language features and 
+runtime enforce and facilitate OOP design, helping create modular, reusable, and maintainable code. 
+OOP in Java emphasizes modeling real-world entities, encapsulating data, and defining clear contracts between 
+components.
+
+
+## Key OOP-related features:
+
+- Classes
+- Objects
+- Encapsulation
+- Inheritance
+- Polymorphism
+- Abstraction
+- Interfaces
+- Abstract classes
+- Method overloading
+- Method overriding
+- Constructors
+- Access modifiers (public, private, protected, default)
+- Packages
+- Static members
+- Non Static members
+- Singleton Class
+- Final (classes, methods, variables)
+- Inner classes
+- Anonymous classes
+- Lambda expressions
+
+Keywords commonly used with OOP in Java — brief theory:
+
+- new
+    - Allocates memory and constructs a new instance of a class. 
+    - Calls a constructor and returns a reference to the created object.
+
+- this
+    - Refers to the current object instance. Used to access instance members, disambiguate shadowed variables, 
+    or pass the current reference to other methods/constructors.
+
+- super
+    - Refers to the superclass portion of the current object. Used to call superclass constructors, 
+    access superclass methods or fields overridden or hidden in the subclass.
+
+- static
+    - Marks members that belong to the class rather than any instance. Static methods/fields can be accessed 
+    without creating an object; static blocks run once when the class is loaded.
+
+- final
+    - Prevents further modification: final class cannot be subclassed, final method cannot be overridden, 
+    final variable is a constant (must be assigned once).
+
+- abstract
+    - Declares incomplete classes or methods. An abstract class may contain abstract methods (no body) that 
+    concrete subclasses must implement; cannot be instantiated directly.
+
+- interface and implements
+    - interface defines a contract of abstract methods (and default/static methods). A class uses implements 
+    to promise it provides implementations for the interface's methods.
+
+- extends
+    - Used in class declarations to create an inheritance relationship (subclass extends superclass). 
+    - Also used for interfaces extending other interfaces.
+
+- instanceof
+    - Tests whether an object is an instance of a given type (class or interface). Useful for safe down-casting 
+    after a type check.
+
+- public / protected / private / (default)
+    - Access modifiers that control visibility: public (accessible everywhere), protected (package + subclasses), 
+    private (class-only), default (package-private).
+
+- synchronized
+    - (Concurrency-related) Ensures only one thread can execute a block or method on the same object/monitor at 
+    a time; often used to protect mutable shared state in object-oriented designs.
+
+Notes:
+- Use new + constructors to create objects; use inheritance (extends, super) to reuse behavior; use interfaces and 
+abstract classes to define contracts and enable polymorphism.
+
+- Prefer immutability (final fields) and encapsulation (private fields + public accessors) for robust OOP design.
+
+
+## Case study:
+
+- Suppose a teacher asks us to create a data-type, which stores 5 roll numbers of 5 students.
+
+- Problem: Store 5 roll numbers
+int[] rollNumbers = new int[5]; 
+
+- Problem: Store 5 names
+String[] names = new String[5];
+
+- Problem: Store student data {rollNumber, name, marks}
+int[] studentRollNumbers = new int[5];
+String[] studentNames = new String[5];
+float[] studentMarks = new float[5];
+
+In the above code where we are storing student data we are creating 3 types of Data structures to store the data. 
+This is not a good practice instead we have to create a single data structure which can store accumulated data of 
+every student collectively.
+
+To do this kind of stuff we need classes and OOPS concepts:
+
+- What is a class?
+  - Class is a named group of properties and functions or methods.
+- It is a blueprint according to which
+- we can store data of an object or instance of the defined class.
+- So we can create our own data type by using classes
+
+So, to store different data properties of a student we need a custom data-type which we can create using classes.
+
+Eg:
+Student[] students = new Student[5];
+
+
+## Real life example of classes:
+
+- Car: A car can be a class or template, and by using this template all companies are creating their cars.
+- Human: A human class also exist logically, and it has all the properties that a human instance has.
+
+Note: A class is a template of an object, and an object is an instance of a class.
+Class creates a data-type and we can use it to create objects. When we declare an object of a class, we are 
+actually declaring an instance of a class.
+
+- Car class properties:
+  - Engine
+  - Price
+  - seats
+  - ....
+  - ..
+
+- Therefore we say:
+Class => Logical construct
+Object => Physical reality  // This occupies space in memory
+
+Object has 3 essential properties:
+- State of the object (value)
+- Identity of the object (whether one object is different from other)
+- Behavior of the object (Effect of the data type operations we have like greeting in human class)
+
+Note: Objects stores in Heap memory, and reference variable are stored in stack memory. (new) keyword 
+dynamically allocates the memory and returns a reference to it. All class objects in Java must be allocated
+dynamically (when memory is allocating at runtime it is dynamic memory allocation) via new keyword.
+
+
+Student st1 (At compile time) = new Student(); (At runtime)
+
+Class name always starts with a capital letter, For eg: String is a class. And by default these complex 
+classes have null as value, but for simple primitives we have some default values like for int it is 0, 
+for float it is 0.0, for boolean it is false.
+
+
+- Initialization of properties without using setter
+rishabh.rollNumber = 1;
+rishabh.name = "Rishabh";
+rishabh.marks = 80.5F;
+
+Initialization using the above is very repetitive therefore, we use constructor, Constructor is a special function.
+Constructor defines what happens when an Object will be created. We pass values in constructor if we want to instantiate
+using custom values, but we can instantiate with default values too via constructor.
+
+
+## Why don't we use "new" keyword while creating primitive data-types? 
+
+- Because in Java primitive data-types are not implemented as Objects. Objects are reference types and stored in heap 
+memory, but primitive types are stored in stack memory therefore no "new" keyword is required, because "new" Keyword
+dynamically allocates memory which get stored in heap.
+
+Student one = new Student();
+Student two = one;
+
+one and two created in stack memory, but both are pointing to same block presented inside the heap memory, as both are
+dynamically allocated. Any change made by one will also reflect in two because both are pointing to same thing.
+
+As we know that primitive types are pass by value, so if we try to swap 2 numbers, they will not swap because of this, 
+there we need to use wrapper class because classes are pass by reference.
+
+class NumberWrapper {
+    int value;
+
+    NumberWrapper(int value) {
+        this.value = value;
+    }
+}
+
+public class Main {
+    static void swapNumbers(NumberWrapper a, NumberWrapper b) {
+        int temp = a.value;
+        a.value = b.value;
+        b.value = temp;
+    }
+
+    public static void main(String[] args) {
+        NumberWrapper x = new NumberWrapper(10);
+        NumberWrapper y = new NumberWrapper(20);
+
+        System.out.println("Before swap: " + x.value + " " + y.value);
+        swapNumbers(x, y);
+        System.out.println("After swap: " + x.value + " " + y.value);
+    }
+}
